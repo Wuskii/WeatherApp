@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JK"
+          crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather App</h1>
+      <form>
+        <div class="form-group">
+          <label for="cityInput">Enter a city:</label>
+          <input type="text" class="form-control" id="cityInput" placeholder="e.g. Paris, Tokyo">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="getWeather()">Get Weather</button>
+      </form>
+      <br>
+      <div id="weatherOutput"></div>
+    </div>
+    <script>
+      function getWeather() {
+        const city = document.getElementById("cityInput").value;
+        fetch(`/weather?city=${city}`)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("weatherOutput").innerHTML = data;
+          })
+          .catch(error => console.error(error));
+      }
+    </script>
+  </body>
+</html>
